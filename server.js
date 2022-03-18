@@ -2,16 +2,33 @@ const express = require('express');
 const { exit } = require('process');
 const app = express();
 const args = require('minimist')(process.argv.slice(2));
-args['port'];
-const port_arg = args.port;
-// I probably gotta do npm init
-if (port_arg == "help") {
-    console.log();
-    exit(0);
-}
-var port = 5000
-if (port_arg != null) {
-    var port = port_arg;
+// console.log(args)
+var port = 5000;
+var debug = false;
+var log = true;
+if (args["port"] == null) {
+    if (args["help"] == true | args["help"] == "true") {
+        console.log("server.js [options]")
+        console.log("--port	Set the port number for the server to listen on. Must be an integer between 1 and 65535.");
+        console.log("--debug	If set to `true`, creates endlpoints /app/log/access/ which returns a JSON access log from the database and /app/error which throws an error with the message \"Error test successful.\" Defaults to `false`.");
+        console.log("--log		If set to false, no log files are written. Defaults to true. Logs are always written to database.");
+        console.log("--help	Return this message and exit.");
+        exit(0);
+    }
+    if (args["debug"] == true | args["debug"] == "true") {
+        debug = true;
+        // console.log("debugging turned on")
+    }
+    if (args["log"] === false | args["log"] === "false") {
+        log = false;
+        // console.log("no logs will be written")
+    }
+} else {
+    args['port'];
+    const port_arg = args.port;
+    if (port_arg != null) {
+        port = port_arg;
+    }
 }
 
 const server = app.listen(port, () => {
