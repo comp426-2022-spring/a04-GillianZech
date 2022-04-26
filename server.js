@@ -68,6 +68,7 @@ app.post("/app/new/user", (req, res, next) => {
         time: Date.now(),
         method: req.method,
         url: req.url,
+        protocol: req.protocol,
     }
     const stmt = db.prepare('INSERT INTO userinfo (username, password) VALUES (?, ?)')
     const info = stmt.run(data.user, data.pass)
