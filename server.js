@@ -67,7 +67,7 @@ app.post("/app/new/user", (req, res, next) => {
         remoteuser: req.user,
         time: Date.now(),
         method: req.method,
-        
+        url: req.url,
     }
     const stmt = db.prepare('INSERT INTO userinfo (username, password) VALUES (?, ?)')
     const info = stmt.run(data.user, data.pass)
