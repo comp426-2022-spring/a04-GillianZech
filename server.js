@@ -70,6 +70,7 @@ app.post("/app/new/user", (req, res, next) => {
         url: req.url,
         protocol: req.protocol,
         httpversion: req.httpVersion,
+        status: req.statusCode,
     }
     const stmt = db.prepare('INSERT INTO userinfo (username, password) VALUES (?, ?)')
     const info = stmt.run(data.user, data.pass)
