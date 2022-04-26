@@ -71,7 +71,8 @@ app.post("/app/new/user", (req, res, next) => {
         protocol: req.protocol,
         httpversion: req.httpVersion,
         status: req.statusCode,
-        referer: req.headers['referer']
+        referer: req.headers['referer'],
+        useragent: req.headers['user-agent']
     }
     const stmt = db.prepare('INSERT INTO userinfo (username, password) VALUES (?, ?)')
     const info = stmt.run(data.user, data.pass)
