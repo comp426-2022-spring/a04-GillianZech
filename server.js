@@ -74,7 +74,7 @@ app.post("/app/new/user", (req, res, next) => {
         referer: req.headers['referer'],
         useragent: req.headers['user-agent']
     }
-    const stmt = db.prepare('INSERT INTO userinfo (remoteaddr, remoteuser, time, method) VALUES (?, ?)')
+    const stmt = db.prepare('INSERT INTO userinfo (remoteaddr, remoteuser, time, method, url) VALUES (?, ?)')
     const info = stmt.run(data.user, data.pass)
     res.status(200).json(info)
 });
