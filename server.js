@@ -59,6 +59,23 @@ app.get('/app', (req, res) => {
     // res.type("text/plain");
 })
 
+// Define other CRUD API endpoints using express.js and better-sqlite3
+// CREATE a new user (HTTP method POST) at endpoint /app/new/
+app.post("/app/new/user", (req, res, next) => {
+    let logdata = {
+        remoteaddr: req.ip,
+        remoteuser: req.user,
+        time: Date.now(),
+        
+    }
+    const stmt = db.prepare('INSERT INTO userinfo (username, password) VALUES (?, ?)')
+    const info = stmt.run(data.user, data.pass)
+    res.status(200).json(info)
+});
+
+
+
+
 app.get('/app/flip', (req, res) => {
     res.status(200).json({ 'flip': coinFlip() })
 })
