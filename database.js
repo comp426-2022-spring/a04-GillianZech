@@ -1,7 +1,7 @@
 // This ensures that things do not fail silently but will throw errors instead.
-"use strict";
+// "use strict";
 const Database = require('better-sqlite3');
-
+const { appendFile } = require('fs');
 // Connect to a database or create one if it doesn't exist yet.
 const db = new Database('log.db');
 
