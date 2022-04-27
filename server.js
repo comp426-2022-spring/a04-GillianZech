@@ -80,8 +80,8 @@ app.post("/app/new/user", (req, res, next) => {
     res.status(200).json(info)
 });
 
-if (debug) {
-    app.get("/app/log/access", (req, res, next) => {
+app.get("/app/log/access", (req, res, next) => {
+    if (debug) {
         try {
             const stmt = db.prepare('SELECT * FROM userinfo').all()
             res.status(200).json(stmt)
@@ -89,11 +89,13 @@ if (debug) {
         } catch {
             console.error(e)
         }
-    })
-    app.get("/app/error", (req, res) => {
+    }
+})
+app.get("/app/error", (req, res) => {
+    if (debug) {
         throw new Error('Error test successful.')
-    })
-}
+    }
+})
 
 if (log) {
     // Use morgan for logging to files
