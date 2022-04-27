@@ -80,7 +80,16 @@ app.post("/app/new/user", (req, res, next) => {
 });
 
 if (debug) {
-    
+    app.get("/app/log/access", (req, res, next) => {
+        try {
+            const stmt = db.prepare('SELECT * FROM userinfo').all()
+            res.status(200).json(stmt)
+            console.log(stmt)
+        } catch {
+            console.error(e)
+        }
+    })
+    app.get("/app/error", )
 }
 
 
