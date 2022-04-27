@@ -79,7 +79,9 @@ app.post("/app/new/user", (req, res, next) => {
     res.status(200).json(info)
 });
 
-
+if (debug) {
+    
+}
 
 
 app.get('/app/flip', (req, res) => {
