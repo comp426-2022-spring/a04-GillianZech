@@ -1,5 +1,6 @@
 const express = require('express');
 const { exit } = require('process');
+const morgan = require('morgan');
 var app = express();
 const db = require("./database.js")
 app.use(express.urlencoded({ extended: true }));
@@ -97,9 +98,9 @@ if (debug) {
 if (log) {
     // Use morgan for logging to files
     // Create a write stream to append (flags: 'a') to a file
-    const ws = fs.createWriteStream('access.log', { flags: 'a' })
+    const accessLog = fs.createWriteStream('access.log', { flags: 'a' })
     // Set up the access logging middleware
-    app.use(morgan('combined', { stream: ws }))
+    app.use(morgan('combined', { stream: accessLog }))
 }
 
 
