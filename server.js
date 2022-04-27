@@ -86,15 +86,20 @@ app.use( (req, res, next) => {
 });
 
 app.get("/app/log/access", (req, res, next) => {
-    // if (debug) {
+    if (debug) {
         try {
-            const stmt = db.prepare('SELECT * FROM userinfo').all()
+            console.log("1")
+            const stmt = db.prepare('SELECT * FROM accesslog').all() // error on this line
+            console.log("2")
             res.status(200).json(stmt)
+            console.log("3")
             console.log(stmt)
+            console.log("4")
+        
         } catch {
-            console.error(e)
+            console.error("")
         }
-    // }
+    }
 })
 
 
