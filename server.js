@@ -63,6 +63,7 @@ app.get('/app', (req, res) => {
 // Define other CRUD API endpoints using express.js and better-sqlite3
 // CREATE a new user (HTTP method POST) at endpoint /app/new/
 app.post("/app/new/user", (req, res, next) => {
+// app.post("/app/new", (req, res, next) => {
     let logdata = {
         remoteaddr: req.ip,
         remoteuser: req.user,
@@ -81,15 +82,16 @@ app.post("/app/new/user", (req, res, next) => {
 });
 
 app.get("/app/log/access", (req, res, next) => {
-    if (debug) {
+    // if (debug) {
         try {
             const stmt = db.prepare('SELECT * FROM userinfo').all()
+            // const stmt = db.prepare('SELECT * FROM userinfo').logdata
             res.status(200).json(stmt)
             console.log(stmt)
         } catch {
             console.error(e)
         }
-    }
+    // }
 })
 app.get("/app/error", (req, res) => {
     if (debug) {
