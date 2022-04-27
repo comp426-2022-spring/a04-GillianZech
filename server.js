@@ -60,6 +60,9 @@ app.get('/app', (req, res) => {
     // res.type("text/plain");
 })
 
+
+
+
 // Define other CRUD API endpoints using express.js and better-sqlite3
 // CREATE a new user (HTTP method POST) at endpoint /app/new/
 app.post("/app/new/user", (req, res, next) => {
@@ -76,8 +79,8 @@ app.post("/app/new/user", (req, res, next) => {
         referer: req.headers['referer'],
         useragent: req.headers['user-agent']
     }
-    const stmt = db.prepare('INSERT INTO userinfo (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referer, useragent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
-    const info = stmt.run(data.user, data.pass)
+    const stmt = db.prepare('INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referer, useragent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+    const info = stmt.run(logdata.user, logdata.pass)
     res.status(200).json(info)
 });
 
@@ -85,7 +88,6 @@ app.get("/app/log/access", (req, res, next) => {
     // if (debug) {
         try {
             const stmt = db.prepare('SELECT * FROM userinfo').all()
-            // const stmt = db.prepare('SELECT * FROM userinfo').logdata
             res.status(200).json(stmt)
             console.log(stmt)
         } catch {
@@ -93,6 +95,11 @@ app.get("/app/log/access", (req, res, next) => {
         }
     // }
 })
+
+
+
+
+
 app.get("/app/error", (req, res) => {
     if (debug) {
         throw new Error('Error test successful.')
@@ -106,6 +113,23 @@ if (log) {
     // Set up the access logging middleware
     app.use(morgan('combined', { stream: accessLog }))
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 app.get('/app/flip', (req, res) => {
