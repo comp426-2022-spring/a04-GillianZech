@@ -62,10 +62,6 @@ app.get('/app', (req, res) => {
 
 // I started getting the "table already exists" error when I used app.use instead of app.post
 
-
-
-// app.post("/app/new/user", (req, res, next) => {
-
 app.use( (req, res, next) => {
     let logdata = {
         remoteaddr: req.ip,
@@ -85,41 +81,25 @@ app.use( (req, res, next) => {
     next()
 });
 
-
-
 if (debug) {
     app.get("/app/log/access", (req, res, next) => {
         try {
-            console.log("1")
+            // console.log("1")
             const stmt = db.prepare('SELECT * FROM accesslog').all()
-            console.log("2")
+            // console.log("2")
             res.status(200).json(stmt) // error on this line
-            console.log("3")
-            console.log(stmt)
-            console.log("4")
+            // console.log("3")
+            // console.log(stmt)
+            // console.log("4")
         
-        } catch {
-            console.error("")
+        } catch(e) {
+            console.error(e)
         }
     });
-}
-
-
-
-
-
-
-
-
-
-
-
-
-app.get("/app/error", (req, res) => {
-    if (debug) {
+    app.get("/app/error", (req, res) => {
         throw new Error('Error test successful.')
-    }
-})
+    })
+}
 
 if (log) {
     // Use morgan for logging to files
@@ -128,15 +108,6 @@ if (log) {
     // Set up the access logging middleware
     app.use(morgan('combined', { stream: accessLog }))
 }
-
-
-
-
-
-
-
-
-
 
 
 
