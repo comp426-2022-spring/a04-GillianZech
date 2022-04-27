@@ -63,8 +63,6 @@ app.get('/app', (req, res) => {
 // I started getting the "table already exists" error when I used app.use instead of app.post
 
 
-// Define other CRUD API endpoints using express.js and better-sqlite3
-// CREATE a new user (HTTP method POST) at endpoint /app/new/
 
 // app.post("/app/new/user", (req, res, next) => {
 
