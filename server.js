@@ -26,20 +26,19 @@ server.js [options]
 var port = 5000;
 var debug = false;
 var log = true;
-if (args["port"] == null) {
-    if (args["help"] == true | args["help"] == "true") {
-        console.log(help)
-        exit(0);
-    }
-    if (args["debug"] == true | args["debug"] == "true") {
-        debug = true;
-        // console.log("debugging turned on")
-    }
-    if (args["log"] === false | args["log"] === "false") {
-        log = false;
-        // console.log("no logs will be written")
-    }
-} else {
+if (args["help"] == true | args["help"] == "true") {
+    console.log(help)
+    exit(0);
+}
+if (args["debug"] == true | args["debug"] == "true") {
+    debug = true;
+    // console.log("debugging turned on")
+}
+if (args["log"] === false | args["log"] === "false") {
+    log = false;
+    // console.log("no logs will be written")
+}
+if (args["port"] != null) {
     args['port'];
     const port_arg = args.port;
     if (port_arg < 1 || port_arg > 65535) {
