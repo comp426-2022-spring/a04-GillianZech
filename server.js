@@ -1,8 +1,9 @@
 const express = require('express');
 const { exit } = require('process');
 const morgan = require('morgan');
+var fs = require('fs');
 var app = express();
-const db = require("./database.js")
+const db = require("./database.js");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const args = require('minimist')(process.argv.slice(2));
