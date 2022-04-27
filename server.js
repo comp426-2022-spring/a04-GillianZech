@@ -94,6 +94,14 @@ if (debug) {
     })
 }
 
+if (log) {
+    // Use morgan for logging to files
+    // Create a write stream to append (flags: 'a') to a file
+    const ws = fs.createWriteStream('access.log', { flags: 'a' })
+    // Set up the access logging middleware
+    app.use(morgan('combined', { stream: ws }))
+}
+
 
 app.get('/app/flip', (req, res) => {
     res.status(200).json({ 'flip': coinFlip() })
